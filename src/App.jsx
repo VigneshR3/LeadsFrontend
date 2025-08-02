@@ -28,8 +28,8 @@ function App() {
     <MyContext.Provider value={{User, setUser}}>
        <BrowserRouter>
        <Routes>
-        <Route path='/' element={<Login/> }/>
         <Route path='/leads' element={<UserProtecter><Leads/></UserProtecter> }/>
+        <Route path='/' element={<Login/> }/>
         <Route path='*' element={<NotFoundPage/>}/>
        </Routes>
        </BrowserRouter>
