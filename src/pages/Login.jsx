@@ -1,10 +1,6 @@
 import React, { useContext } from "react";
 import axios from "axios";
-import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Paper, TextField, Button, Box, Typography } from "@mui/material";
 import { useState } from "react";
 import { useFormik } from "formik";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -15,6 +11,7 @@ import MenuAppBar from "../componens/MenuAppBar";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";  
 import { MyContext } from "../MyContext";
+
 
 const Login = () => {
   const { setUser } = useContext(MyContext);
