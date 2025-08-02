@@ -372,7 +372,7 @@ export default function LeadTable({ setData }) {
                     <TableCell align="center">{row.source}</TableCell>
                     <TableCell align="center">
                       <img
-                        src={`http://localhost:5000/images/${row.assigned}`}
+                        src={`https://leadsbackend-yxod.onrender.com/images/${row.assigned}`}
                         alt={row.assigned}
                         width={30}
                       />
