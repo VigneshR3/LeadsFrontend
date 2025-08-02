@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import MenuAppBar from "../componens/MenuAppBar";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import LeadForm from "../componens/LeadFrom";
 import { FaDownload } from "react-icons/fa";
 import Content from "../componens/Content";
@@ -9,7 +12,7 @@ import LeadTable from "../componens/LeadTable";
 import { CSVLink } from "react-csv";
 
 const Leads = () => {
-  const [ data ,setData] = useState([])
+  const [data, setData] = useState([]);
   const headers = [
     { key: "leadid", label: "Lead ID" },
     { key: "customer", label: "Customer" },
@@ -48,7 +51,7 @@ const Leads = () => {
             <LeadForm />
             <Button
               variant="outlined"
-              sx={{ color: "black", borderColor: "black",maxHeight:40 }}
+              sx={{ color: "black", borderColor: "black", maxHeight: 40 }}
               startIcon={<FaDownload />}
             >
               <CSVLink data={data} headers={headers} filename={"my-table.csv"}>
