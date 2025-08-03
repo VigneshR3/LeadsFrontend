@@ -9,9 +9,8 @@ import { BaseApi } from "../BaseApi";
 import { ToastContainer, toast } from "react-toastify";
 import MenuAppBar from "../componens/MenuAppBar";
 import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";  
+import { jwtDecode } from "jwt-decode";
 import { MyContext } from "../MyContext";
-
 
 const Login = () => {
   const { setUser } = useContext(MyContext);
@@ -20,21 +19,28 @@ const Login = () => {
     email: "",
     password: "",
   };
+  const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
   const Formik = useFormik({
     initialValues: InitialValues,
     validationSchema: LoginSchema,
     onSubmit: (values) => {
       console.log(values);
+      setDisabled(false);
       axios
-        .post(`${BaseApi}/user/login`, values)
+        .post(`${BaseApi}/user/login`, values, {
+          headers: {
+            "Content-Type": "application/json", // ✅ Tells backend it's JSON
+          },
+          withCredentials: true, // If you're using cookies
+        })
         .then((res) => {
           console.log("response", res);
           Cookies.set("UserToken", res.data.token);
           const decoded = jwtDecode(res.data.token);
           console.log("Decoded token:", decoded);
           setUser(decoded);
-          notify(res);
+          notify("Login Succussfully");
           Formik.resetForm();
           setTimeout(() => {
             navigate("/leads");
@@ -42,7 +48,12 @@ const Login = () => {
         })
         .catch((e) => {
           console.log("error", e);
-          notify(e.response.data.message);
+          setDisabled(false);
+
+          notify("Login Faild !");
+        })
+        .finally(() => {
+          setDisabled(false); // Always re-enable the button
         });
     },
   });
@@ -96,12 +107,7 @@ const Login = () => {
               fullWidth
             />
 
-            <Button
-              onSubmit={Formik.handleSubmit}
-              type="submit"
-              variant="contained"
-            >
-              {" "}
+            <Button type="submit" variant="contained" disabled={disabled}>
               Submit
             </Button>
           </Box>
