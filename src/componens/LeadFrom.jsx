@@ -67,7 +67,12 @@ export default function LeadForm() {
        fd.append("assigned",values.assigned)
        fd.append("status",values.status)
      await axios 
-        .post(`${BaseApi}/leads/create`, fd)
+        .post(`${BaseApi}/leads/create`, fd ,{
+          headers: {
+            "Content-Type": "application/json", // ✅ Tells backend it's JSON
+          },
+          withCredentials: true, // If you're using cookies
+        })
         .then((res) => {
           console.log("✅ Lead created", res.data);
           Formik.resetForm()
